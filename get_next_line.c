@@ -6,7 +6,7 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:10:11 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/02 05:37:38 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/02 06:27:17 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -27,3 +27,4 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	return (0);
 }
+//Windows WSL
