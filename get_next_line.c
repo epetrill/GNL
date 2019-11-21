@@ -6,7 +6,7 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:10:11 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/21 17:55:37 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/21 19:25:55 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -68,12 +68,12 @@ int	get_next_line(int fd, char **line)
 
 	ret = 1;
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) || !(line)
-			||!(res = malloc(BUFFER_SIZE + 1)))
+			|| !(res = malloc(BUFFER_SIZE + 1)))
 		return (-1);
 	res[0] = '\0';
-	if(!(buffer))
+	if (!(buffer))
 	{
-		if(!(buffer = malloc(BUFFER_SIZE + 1)))
+		if (!(buffer = malloc(BUFFER_SIZE + 1)))
 			return (-1);
 		ret = ft_read(fd, &res, buffer);
 	}
