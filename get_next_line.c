@@ -6,7 +6,7 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:10:11 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/21 22:37:09 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/22 00:28:49 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
@@ -19,18 +19,20 @@ int	ft_read(int fd, char **res, char *buffer)
 	int	j;
 	int	ret;
 
-	i = 0;
 	j = 0;
-	while ((i = ft_strchr_mod(*res)) == -1 && ret > 0)
+	ret = 1;
+	while (((i = ft_strchr_mod(*res)) == -1) && ret > 0)
 	{
 		ret = read(fd, buffer, BUFFER_SIZE);
-		ft_strjoin_mod(*res, buffer);
+		buffer[ret] = '\0';
+		if ((*res = ft_strjoin_mod(*res, buffer)) == NULL)
+			return (-1);
 	}
-	i != -1 ? *res[i] = '\0' : 0;
-	if (i != -1)
+	i != -1 ? (*res)[i] = '\0' : 0;
+	if (ret > 0 && i != -1)
 	{
 		i = ft_strchr_mod(buffer);
-		while (buffer[i + 1])
+		while (buffer[i])
 			buffer[j++] = buffer[1 + i++];
 		buffer[j] = '\0';
 	}
@@ -46,18 +48,19 @@ int	ft_rest(char *res, char *buffer)
 	j = 0;
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	j = i;
 	res[i] = '\0';
-	while (i >= 0)
-	{
+	while (i-- > 0)
 		res[i] = buffer[i];
-		i--;
+	i = ft_strchr_mod(buffer);
+	if(i != -1)
+	{
+		buffer[i] == '\n' ? i++ : 0;
+		while (buffer[i])
+			buffer[j++] = buffer[i++];
+		buffer[j] = '\0';
+		return (1);
 	}
-	i = 0;
-	while (buffer[j] && buffer[j + 1])
-		buffer[i++] = buffer[1 + j++];
-	buffer[i] = '\0';
-	return (i);
+	return (0);
 }
 
 int	get_next_line(int fd, char **line)
@@ -68,12 +71,12 @@ int	get_next_line(int fd, char **line)
 
 	ret = 1;
 	if (BUFFER_SIZE <= 0 || read(fd, 0, 0) || !(line)
-			|| !(res = malloc(BUFFER_SIZE + 1)))
+			|| !(res = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (-1);
 	res[0] = '\0';
 	if (!(buffer))
 	{
-		if (!(buffer = malloc(BUFFER_SIZE + 1)))
+		if (!(buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 			return (-1);
 		ret = ft_read(fd, &res, buffer);
 	}

@@ -6,13 +6,11 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:12:05 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/21 21:33:51 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/22 00:40:17 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
-#include <sys/types.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include "get_next_line.h"
 #include <stdio.h>
@@ -23,12 +21,13 @@ int	main(void)
 	int		fd;
 	int		ret;
 
+	ret = 1;
 	fd = open("texte.txt", O_RDONLY);
-	while (ret > 0)
+	while (get_next_line(fd, &res))
 	{
-		ret = get_next_line(fd, &res);
 		printf("%s\n", res);
 		free(res);
 	}
+	free(res);
 	close(fd);
 }
