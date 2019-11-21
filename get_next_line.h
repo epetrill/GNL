@@ -6,17 +6,13 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:10:27 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/21 21:48:22 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/21 22:16:57 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
-# ifndef BUFFER_SIZE
-# define BUFFER_SIZE 32
-# endif
 
 # include <unistd.h>
 # include <stdlib.h>
