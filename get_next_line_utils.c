@@ -6,16 +6,16 @@
 /*   By: epetrill <marvin@le-101.fr>                +:+   +:    +:    +:+     */
 /*                                                 #+#   #+    #+    #+#      */
 /*   Created: 2019/10/24 07:10:42 by epetrill     #+#   ##    ##    #+#       */
-/*   Updated: 2019/11/02 05:15:23 by epetrill    ###    #+. /#+    ###.fr     */
+/*   Updated: 2019/11/20 20:28:28 by epetrill    ###    #+. /#+    ###.fr     */
 /*                                                         /                  */
 /*                                                        /                   */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static int		ft_strlen(const char *str)
+size_t	ft_strlen(const char *str)
 {
-	int i;
+	size_t i;
 
 	i = 0;
 	while (str[i])
@@ -23,48 +23,45 @@ static int		ft_strlen(const char *str)
 	return (i);
 }
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strjoin_mod(char *s1, char const *s2)
 {
-	unsigned char	*dest;
-	unsigned char	*source;
+	char	*ptr;
+	int		i;
+	int		j;
 
-	source = (unsigned char *)src;
-	dest = (unsigned char *)dst;
-	while (n--)
-	{
-		*dest = *source;
-		dest++;
-		source++;
-	}
-	return (dst);
-}
-
-static void		*ft_memset(void *b, int c, size_t len)
-{
-	size_t			i;
-	unsigned char	*ptr;
-
+	if (!(s1) || !(s2))
+		return (NULL);
+	j = 0;
 	i = 0;
-	ptr = (unsigned char *)b;
-	while (i < len)
+	if (!(ptr = malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1)))
+		return (0);
+	while (s1[i])
 	{
-		ptr[i] = (unsigned char)c;
+		ptr[i] = s1[i];
 		i++;
 	}
-	return (b);
-}
-
-static void		ft_bzero(void *s, size_t n)
-{
-	ft_memset(s, 0, n);
-}
-
-void		*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-
-	if (!(ptr = malloc(count * size)))
-		return (NULL);
-	ft_bzero(ptr, count * size);
+	while (s2[j])
+	{
+		ptr[i + j] = s2[j];
+		j++;
+	}
+	ptr[i + j] = '\0';
+	free(s1);
 	return (ptr);
+}
+
+int		ft_strchr_mod(const char *s)
+{
+	int i;
+
+	i = 0;
+	while (*s && *s != '\n')
+	{
+		s++;
+		i++;
+	}
+	if (*s == '\n')
+		return (i);
+	else
+		return (-1);
 }
