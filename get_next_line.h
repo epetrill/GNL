@@ -17,9 +17,13 @@
 # include <unistd.h>
 # include <stdlib.h>
 
+# define BUFFER_SIZE 32
+
 int		get_next_line(int fd, char **line);
 size_t	ft_strlen(const char *str);
 char	*ft_strjoin_mod(char *s1, const char *s2);
 int		ft_strchr_mod(const char *s);
+
+
 
 #endif
